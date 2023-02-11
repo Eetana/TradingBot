@@ -9,7 +9,7 @@ def setup_DataFrame():
     companies = pdc.get_listed_companies()
     
     # Create a list of key info
-    key_info = ["Stock","Open", "Current", "Bid", "Current Offer", "% Change", "Our Amount", "Our Value"]
+    key_info = ["Stock","Open", "Current", "Bid", "Current Offer", "% Change", "Previous % change", "Our Amount", "Our Value"]
     
     df = pd.DataFrame(columns= key_info)
     
@@ -23,14 +23,16 @@ def setup_DataFrame():
         # Try to access stock information if possible
         # try:
         share_info = pds.get_security_info(company["ticker"])
-        
+        # print(share_info)
+        # return 0,1
         # Add needed items onto the array 
         curr_data.append(company["ticker"])                       # Stock
         curr_data.append(share_info["open_price"])              # Open
         curr_data.append(share_info["last_price"])              # Current
         curr_data.append(share_info["bid_price"])               # Bid
         curr_data.append(share_info["offer_price"])             # Current Offer
-        curr_data.append(share_info["day_change_percent"])   # % Change
+        curr_data.append(share_info["day_change_percent"])      # % Change
+        curr_data.append(share_info["prev_day_change_percent"])      # % Change
         curr_data.append(0)
         curr_data.append(0)
         
